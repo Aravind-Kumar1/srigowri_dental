@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #1e293b;
+  --primary: #1A4996;
+  --primary-dark: #123369;
+  --secondary: #1e293b;
+  --accent: #1A4996;
+  --accent-light: #EBF8FF;
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+
+  --shadow-premium: 0 10px 40px -10px rgba(0, 118, 190, 0.2);
+  --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+  --shadow-card-hover: 0 20px 50px -12px rgba(0, 118, 190, 0.15);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-color: var(--background);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-tight font-bold;
+  }
+}
+
+.glass {
+  @apply bg-white/80 backdrop-blur-md border border-white/20;
+}
+
+.section-padding {
+  @apply py-6 lg:py-12 px-6 lg:px-12 relative;
+}
+
+.container-custom {
+  @apply max-w-7xl mx-auto w-full px-4 sm:px-6;
+}
+
+/* Typography Consistency */
+.heading-hero {
+  @apply text-2xl sm:text-3xl lg:text-5xl xl:text-[3.25rem] font-bold text-secondary leading-[1.1] tracking-tight mb-6;
+}
+
+.heading-section {
+  @apply text-xl sm:text-2xl lg:text-[2.5rem] font-bold text-secondary leading-[1.2] mb-4;
+}
+
+.text-body {
+  @apply text-sm sm:text-base lg:text-[1.0625rem] text-muted-foreground leading-relaxed;
+}
+
+.text-body-small {
+  @apply text-xs sm:text-sm text-muted-foreground leading-relaxed;
+}
+
+/* Premium Card Style */
+.premium-card {
+  @apply bg-white rounded-2xl border border-border/40 shadow-card transition-all duration-300;
+}
+
+.gradient-text {
+  @apply text-primary;
+}
+
+.btn-premium {
+  @apply inline-flex items-center justify-center transition-all duration-300 active:scale-[0.98] rounded-full font-bold;
+  box-shadow: 0 4px 15px -1px rgba(26, 73, 150, 0.25);
+}
+
+.btn-premium:hover {
+  @apply brightness-110;
+  box-shadow: 0 12px 25px -5px rgba(26, 73, 150, 0.45);
+}
+
+@keyframes logoFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+
+  50% {
+    transform: translateY(-6px) scale(1.02);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(0.95);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Utilities */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Hide video extra controls */
+  video::-webkit-media-controls-fullscreen-button,
+  video::-webkit-media-controls-download-button {
+    display: none !important;
+  }
+
+  video::-webkit-media-controls-enclosure {
+    overflow: hidden !important;
+  }
+
+  video::-webkit-media-controls-panel {
+    width: calc(100% + 50px) !important;
+    /* Pushes the 'three dots' off the panel */
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+
+  @keyframes marquee-half {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee-half {
+    animation: marquee-half 50s linear infinite;
+  }
+
+  .animate-marquee-half:hover,
+  .animate-marquee-half:active,
+  .animate-marquee-half:focus {
+    animation-play-state: paused;
+  }
+
+
+  @keyframes loading-progress {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+  }
+
+  .animate-loading-progress {
+    animation: loading-progress 1.5s ease-in-out infinite;
+  }
+
+  @keyframes logo-breath {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+
+  .animate-logo-breath {
+    animation: logo-breath 2.5s ease-in-out infinite;
+  }
+}
