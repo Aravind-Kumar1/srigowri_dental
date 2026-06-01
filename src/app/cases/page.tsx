@@ -1,9 +1,24 @@
-"use client";
-
+import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Cases from "@/components/sections/Cases";
 import CTA from "@/components/sections/CTA";
+
+export const metadata: Metadata = {
+  title: "Before & After Smile Transformations | Sri Gowri Dental Care Hayathnagar",
+  description:
+    "See real patient smile transformations at Sri Gowri Dental Care, Hayathnagar, Hyderabad. Before & after results for dental implants, veneers, smile designing & cosmetic dentistry. Best results in Hyderabad.",
+  alternates: {
+    canonical: "https://www.srigowridentalcare.com/cases",
+  },
+  openGraph: {
+    title: "Dental Smile Transformations | Sri Gowri Dental Care Hayathnagar",
+    description:
+      "Real before & after smile makeover results from Hayathnagar's #1 dental clinic.",
+    url: "https://www.srigowridentalcare.com/cases",
+  },
+};
+
 
 export default function CasesPage() {
   return (

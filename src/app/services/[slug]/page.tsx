@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { servicesData } from "@/lib/services-data";
+import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CTA from "@/components/sections/CTA";
@@ -12,6 +13,7 @@ import Hero from "@/components/sections/Hero";
 
 const PHONE_DISPLAY = "+91 7981 765 567";
 const PHONE_HREF = "tel:+917981765567";
+const BASE_URL = "https://www.srigowridentalcare.com";
 
 /** Pre-render every service page at build time so navigation is static HTML, not on-demand SSR. */
 export function generateStaticParams() {
@@ -23,6 +25,25 @@ export const dynamicParams = false;
 type ServiceDetailPageProps = {
   params: Promise<{ slug: string }>;
 };
+
+export async function generateMetadata({ params }: ServiceDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const service = servicesData.find((s) => s.slug === slug);
+  if (!service) return {};
+
+  return {
+    title: `${service.title} in Hayathnagar Hyderabad | Sri Gowri Dental Care`,
+    description: `Get the best ${service.title} treatment in Hayathnagar, Hyderabad at Sri Gowri Dental Care. ${service.description} Book a free consultation today!`,
+    alternates: {
+      canonical: `${BASE_URL}/services/${slug}`,
+    },
+    openGraph: {
+      title: `${service.title} in Hayathnagar Hyderabad | Sri Gowri Dental Care`,
+      description: service.description,
+      url: `${BASE_URL}/services/${slug}`,
+    },
+  };
+}
 
 export default async function ServiceDetailPage({ params }: ServiceDetailPageProps) {
   const { slug } = await params;

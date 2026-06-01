@@ -1,13 +1,40 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import Image from "next/image";
 import { CalendarDays, Clock3, ArrowLeft, CheckCircle2 } from "lucide-react";
-import { getBlogPostBySlug } from "@/lib/blogs";
+import { getBlogPostBySlug, blogPosts } from "@/lib/blogs";
+
+const BASE_URL = "https://www.srigowridentalcare.com";
 
 type BlogDetailPageProps = {
   params: Promise<{ slug: string }>;
 };
+
+export function generateStaticParams() {
+  return blogPosts.map(({ slug }) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: BlogDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPostBySlug(slug);
+  if (!post) return {};
+
+  return {
+    title: `${post.title} | Sri Gowri Dental Care Hayathnagar`,
+    description: `${post.excerpt} Read more on the Sri Gowri Dental Care blog – Hayathnagar, Hyderabad.`,
+    alternates: {
+      canonical: `${BASE_URL}/blogs/${slug}`,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: `${BASE_URL}/blogs/${slug}`,
+      images: [{ url: post.imageUrl, alt: post.title }],
+    },
+  };
+}
 
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { slug } = await params;

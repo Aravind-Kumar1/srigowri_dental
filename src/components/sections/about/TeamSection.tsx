@@ -6,18 +6,18 @@ import { Award } from "lucide-react";
 
 const doctors = [
   {
-    name: "Dr. K Pratej Kiran",
-    role: "Pediatric Dentist, Root canal specialist, Aligners provider",
-    degree: "BDS, MDS (Paediatric Dentistry)",
-    image: "/pratej_doc.png",
-    tags: ["Paediatric Dentistry", "Root Canal", "Aligners"],
-  },
-  {
     name: "Dr. N Sri Gowri",
     role: "Prosthodontist and Implantologist, BPS Provider and TMJ Specialist",
     degree: "BDS, MDS",
     image: "/gowri.jpeg",
     tags: ["Prosthodontics", "Implantology", "TMJ Specialist"],
+  },
+  {
+    name: "Dr. K Pratej Kiran",
+    role: "Pediatric Dentist, Root canal specialist, Aligners provider",
+    degree: "BDS, MDS (Paediatric Dentistry)",
+    image: "/pratej_doc.png",
+    tags: ["Paediatric Dentistry", "Root Canal", "Aligners"],
   },
   {
     name: "Dr. Srikanth Kurra",

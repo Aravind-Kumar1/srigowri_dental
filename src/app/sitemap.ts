@@ -2,41 +2,78 @@ import { MetadataRoute } from 'next';
 import { servicesData } from '@/lib/services-data';
 import { blogPosts } from '@/lib/blogs';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.dentalclinic.com';
+const BASE_URL = 'https://www.srigowridentalcare.com';
 
-  // Base routes
-  const routes = [
-    '',
-    '/about-us',
-    '/contact-us',
-    '/services',
-    '/blogs',
-    '/cases',
-    '/faq',
-    '/book-appointment',
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+
+  // Core routes — highest priority pages
+  const coreRoutes: MetadataRoute.Sitemap = [
+    {
+      url: BASE_URL,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 1.0,
+    },
+    {
+      url: `${BASE_URL}/services`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/book-appointment`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/about-us`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/contact-us`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/cases`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/blogs`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/faq`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+  ];
+
+  // Individual service pages — high priority for local SEO
+  const serviceRoutes: MetadataRoute.Sitemap = servicesData.map((service) => ({
+    url: `${BASE_URL}/services/${service.slug}`,
+    lastModified: now,
     changeFrequency: 'monthly' as const,
-    priority: route === '' ? 1 : 0.8,
+    priority: 0.9,
   }));
 
-  // Service routes
-  const serviceRoutes = servicesData.map((service) => ({
-    url: `${baseUrl}/services/${service.slug}`,
-    lastModified: new Date(),
+  // Blog posts
+  const blogRoutes: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${BASE_URL}/blogs/${post.slug}`,
+    lastModified: now,
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }));
 
-  // Blog routes
-  const blogRoutes = blogPosts.map((post) => ({
-    url: `${baseUrl}/blogs/${post.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  }));
-
-  return [...routes, ...serviceRoutes, ...blogRoutes];
+  return [...coreRoutes, ...serviceRoutes, ...blogRoutes];
 }

@@ -1,11 +1,25 @@
-"use client";
-
+import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Contact from "@/components/sections/Contact";
 import CTA from "@/components/sections/CTA";
 import { Phone } from "lucide-react";
 import Hero from "@/components/sections/Hero";
+
+export const metadata: Metadata = {
+  title: "Contact Us | Dental Clinic in Hayathnagar | Sri Gowri Dental Care",
+  description:
+    "Contact Sri Gowri Dental Care, Hayathnagar, Hyderabad. Call +91 7981 765 567 or visit us at Shubodaya Colony, Kuntloor Road, Hayathnagar. Open Mon–Sat 9AM–9PM, Sunday 10AM–1PM.",
+  alternates: {
+    canonical: "https://www.srigowridentalcare.com/contact-us",
+  },
+  openGraph: {
+    title: "Contact Sri Gowri Dental Care – Hayathnagar, Hyderabad",
+    description:
+      "Get directions, phone number & hours for Sri Gowri Dental Care in Hayathnagar, Hyderabad. Call +91 7981 765 567.",
+    url: "https://www.srigowridentalcare.com/contact-us",
+  },
+};
 
 export default function ContactPage() {
   return (
