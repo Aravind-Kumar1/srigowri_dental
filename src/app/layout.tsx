@@ -112,7 +112,7 @@ export const metadata: Metadata = {
     apple: "/gowri_logo.png",
   },
   verification: {
-    google: "add-your-google-search-console-verification-code-here",
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "googlee7b8d921f7343df6",
   },
 };
 
